@@ -19,12 +19,14 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 export async function POST(request: NextResponse): Promise<NextResponse> {
   try {
     await connectDB();
-    const { title, description, priority, status, dueDate } =
-      await request.json();
+
+    // DEBUG: inspect the schema the model is using
+    console.log('Task schema paths:', Object.keys(Task.schema.paths));
+
+    const { taskName, priority, status, dueDate } = await request.json();
 
     const newTask = await Task.create({
-      title,
-      description,
+      taskName,
       priority,
       status,
       dueDate,

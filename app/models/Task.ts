@@ -2,11 +2,7 @@ import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
+    taskName: {
       type: String,
       required: true,
     },
@@ -26,6 +22,9 @@ const taskSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
+
+// DEBUG: log the schema when this module is imported
+console.log("Building Task schema; paths:", Object.keys(taskSchema.paths));
 
 const Task = mongoose.models.Task || mongoose.model("Task", taskSchema);
 
