@@ -1,8 +1,8 @@
-import Homepage from "@/component/Home";
+import Homepage from "../component/partials/Home";
 
 export default function Home() {
   return (
-    <main>
+    <main className="ml-5">
       <Homepage />
     </main>
   );
