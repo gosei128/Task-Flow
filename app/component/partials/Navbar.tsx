@@ -1,19 +1,22 @@
 import { auth, signIn, signOut } from "@/middleware/auth";
 import { Github } from "griddy-icons";
 import SidebarGroup from "../SidebarGroup";
+
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarFooter,
+  useSidebar,
 } from "@/components/ui/sidebar";
 const Navbar = async () => {
   const session = await auth();
   console.log(session);
+
   return (
     <Sidebar>
       <SidebarHeader>
-        <h1 className="text-3xl font-bold text-dark-blue-600">TaskFlow</h1>
+        <h1 className="text-3xl font-bold text-dark-blue-600 ">TaskFlow</h1>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup />

@@ -1,8 +1,11 @@
+import Dashboard from "../Dashboard";
+import Header from "./Header";
 const Homepage = () => {
   return (
-    <div>
-      <main>Hello world</main>
-    </div>
+    <main>
+      <Header />
+      <Dashboard />
+    </main>
   );
 };
 

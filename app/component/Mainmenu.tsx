@@ -2,6 +2,7 @@
 import { useState } from "react";
 const Mainmenu = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
+
   return (
     <main className="py-2">
       <ul>

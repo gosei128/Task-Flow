@@ -7,7 +7,7 @@ export default function Layout({
   return (
     <SidebarProvider>
       <Navbar />
-      <main className="antialiased bg-dark-blue-50">
+      <main className="antialiased w-full">
         <SidebarTrigger />
         {children}
       </main>

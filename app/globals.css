@@ -7,6 +7,9 @@
 /* body {
   font-family: "var(--font-signika-negative)", sans-serif;
 } */
+.columns {
+  @apply rounded-lg border bg-white p-2 border-gray-500;
+}
 
 :root {
   --sidebar: hsl(0 0% 98%);
