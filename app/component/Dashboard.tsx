@@ -1,14 +1,14 @@
-import { ClipboardList } from "griddy-icons";
+import { ClipboardList, Check, Time, AlertCircle } from "griddy-icons";
 const Dashboard = () => {
   return (
     <main className=" py-2 ">
       <div className="grid grid-cols-[repeat(4,1fr)] grid-rows-[repeat(3,1fr)] gap-y-2.5 gap-x-2.5">
-        <div className="columns p-2">
+        <div className="columns">
           <div className="flex items-center justify-between">
-            <h3>Total Task</h3>
+            <h4>Total Task</h4>
             <ClipboardList
-              size={35}
-              className="text-indigo-500 p-1 rounded-lg  bg-indigo-300"
+              size={30}
+              className="text-indigo-500 p-1 rounded-lg  bg-indigo-200"
             />
           </div>
 
@@ -17,9 +17,50 @@ const Dashboard = () => {
             <small className="text-green-600">+12% from last week</small>
           </p>
         </div>
-        <div className="columns">2</div>
-        <div className="columns">3</div>
-        <div className="columns">4</div>
+        <div className="columns">
+          <div className="flex items-center justify-between">
+            <h4>Completed</h4>
+            <Check
+              size={30}
+              className="text-green-500 p-1 rounded-lg  bg-green-200"
+            />
+          </div>
+
+          <h1 className="text-3xl font-bold">89</h1>
+          <p>
+            <small className="text-green-600">+8% from last week</small>
+          </p>
+        </div>
+        <div className="columns">
+          <div className="flex items-center justify-between">
+            <h4>In Progress</h4>
+            <Time
+              filled
+              size={30}
+              className="text-orange-500 p-1 rounded-lg  bg-orange-200"
+            />
+          </div>
+
+          <h1 className="text-3xl font-bold">23</h1>
+          <p>
+            <small className="text-orange-600">+3% from last week</small>
+          </p>
+        </div>
+        <div className="columns">
+          <div className="flex items-center justify-between">
+            <h4>Overdue</h4>
+            <AlertCircle
+              filled
+              size={30}
+              className="text-red-500 p-1 rounded-lg  bg-red-200"
+            />
+          </div>
+
+          <h1 className="text-3xl font-bold">2</h1>
+          <p>
+            <small className="text-red-600"> -2% from last week</small>
+          </p>
+        </div>
       </div>
     </main>
   );
