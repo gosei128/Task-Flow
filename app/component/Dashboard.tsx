@@ -2,8 +2,8 @@ import { ClipboardList, Check, Time, AlertCircle } from "griddy-icons";
 const Dashboard = () => {
   return (
     <main className=" py-2 ">
-      <div className="grid grid-cols-[repeat(4,1fr)] grid-rows-[repeat(3,1fr)] gap-y-2.5 gap-x-2.5">
-        <div className="columns">
+      <div className="grid grid-cols-[repeat(4,1fr)] gap-y-2.5 gap-x-2.5">
+        <div className="cards">
           <div className="flex items-center justify-between">
             <h4>Total Task</h4>
             <ClipboardList
@@ -17,7 +17,7 @@ const Dashboard = () => {
             <small className="text-green-600">+12% from last week</small>
           </p>
         </div>
-        <div className="columns">
+        <div className="cards">
           <div className="flex items-center justify-between">
             <h4>Completed</h4>
             <Check
@@ -31,7 +31,7 @@ const Dashboard = () => {
             <small className="text-green-600">+8% from last week</small>
           </p>
         </div>
-        <div className="columns">
+        <div className="cards">
           <div className="flex items-center justify-between">
             <h4>In Progress</h4>
             <Time
@@ -46,7 +46,7 @@ const Dashboard = () => {
             <small className="text-orange-600">+3% from last week</small>
           </p>
         </div>
-        <div className="columns">
+        <div className="cards">
           <div className="flex items-center justify-between">
             <h4>Overdue</h4>
             <AlertCircle
