@@ -3,7 +3,7 @@ import Header from "./Header";
 import TaskTab from "../TaskTabs";
 const Homepage = () => {
   return (
-    <main>
+    <main className="w-full h-full ">
       <Header />
       <Dashboard />
       <TaskTab />

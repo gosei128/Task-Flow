@@ -5,7 +5,11 @@ import Task from "@/app/models/Task";
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     await connectDB();
-    const tasks = await Task.find();
+    const { searchParams } = new URL(request.url);
+    const status = searchParams.get("status");
+
+    const filter = status ? { status } : {};
+    const tasks = await Task.find(filter);
     return NextResponse.json(tasks);
   } catch (error) {
     console.error("Error fetching tasks:", error);
@@ -21,7 +25,7 @@ export async function POST(request: NextResponse): Promise<NextResponse> {
     await connectDB();
 
     // DEBUG: inspect the schema the model is using
-    console.log('Task schema paths:', Object.keys(Task.schema.paths));
+    console.log("Task schema paths:", Object.keys(Task.schema.paths));
 
     const { taskName, priority, status, dueDate } = await request.json();
 

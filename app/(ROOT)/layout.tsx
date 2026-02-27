@@ -5,9 +5,9 @@ export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <SidebarProvider>
+    <SidebarProvider className="h-full">
       <Navbar />
-      <main className="antialiased w-full">
+      <main className="antialiased flex-1">
         <SidebarTrigger />
         {children}
       </main>

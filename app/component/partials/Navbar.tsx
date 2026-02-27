@@ -1,7 +1,6 @@
 import { auth, signIn, signOut } from "@/middleware/auth";
 import { Github } from "griddy-icons";
 import SidebarGroup from "../SidebarGroup";
-
 import {
   Sidebar,
   SidebarContent,
@@ -9,9 +8,9 @@ import {
   SidebarFooter,
   useSidebar,
 } from "@/components/ui/sidebar";
+import Image from "next/image";
 const Navbar = async () => {
   const session = await auth();
-  console.log(session);
 
   return (
     <Sidebar>
@@ -28,6 +27,13 @@ const Navbar = async () => {
               <div className="border border-gray-400 inset-shadow-sm inset-shadow-gray-300 px-4 py-2 rounded-lg mb-2">
                 <h1>
                   {session.user.image && (
+                    // <Image
+                    //   src={session.user.image}
+                    //   alt="Guest"
+                    //   className="w-8 h-8 rounded-full mr-2 inline-block"
+                    //   width={20}
+                    //   height={20}
+                    // />
                     <img
                       src={session.user.image}
                       alt="User Avatar"
