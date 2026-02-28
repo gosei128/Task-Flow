@@ -7,6 +7,8 @@ import {
   SidebarHeader,
   SidebarFooter,
   useSidebar,
+  SidebarMenu,
+  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 const Navbar = async () => {
@@ -24,25 +26,6 @@ const Navbar = async () => {
         <div>
           {session && session.user ? (
             <div className="">
-              <div className="border border-gray-400 inset-shadow-sm inset-shadow-gray-300 px-4 py-2 rounded-lg mb-2">
-                <h1>
-                  {session.user.image && (
-                    // <Image
-                    //   src={session.user.image}
-                    //   alt="Guest"
-                    //   className="w-8 h-8 rounded-full mr-2 inline-block"
-                    //   width={20}
-                    //   height={20}
-                    // />
-                    <img
-                      src={session.user.image}
-                      alt="User Avatar"
-                      className="w-8 h-8 rounded-full mr-2 inline-block"
-                    />
-                  )}
-                  {session.user.name}
-                </h1>
-              </div>
               <form
                 action={async () => {
                   "use server";
@@ -50,12 +33,10 @@ const Navbar = async () => {
                 }}
                 className=" border-2  cursor-pointer bg-[#131316] text-white rounded-lg px-4 py-2 text-center"
               >
-                <button
-                  type="submit"
-                  className="cursor-pointer w-full items-center gap-1 justify-center flex text-center"
-                >
+                <button type="submit" className="cursor-pointer text-xs w-full">
                   <Github size={20} />
-                  Logout
+
+                  {session.user.name}
                 </button>
               </form>
             </div>
