@@ -28,7 +28,9 @@ const Navbar = async () => {
   return (
     <Sidebar>
       <SidebarHeader>
-        <h1 className="text-3xl font-bold text-dark-blue-600 ">TaskFlow</h1>
+        <h1 className="text-3xl font-extrabold text-dark-blue-600 ">
+          TaskFlow
+        </h1>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup />
@@ -63,7 +65,7 @@ const Navbar = async () => {
                     </div>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent className="translate-x-45 translate-y-15">
                   <DropdownMenuGroup>
                     <DropdownMenuLabel>
                       <strong className="text-gray-500">My Account</strong>
@@ -104,9 +106,6 @@ const Navbar = async () => {
             </div>
           ) : (
             <div className="text-center">
-              <div className="border-2 p-2 rounded-lg mb-2 bg-dark-blue-400 text-white border-dark-blue-500">
-                <h1>Guest</h1>
-              </div>
               <form
                 action={async () => {
                   "use server";
@@ -116,7 +115,7 @@ const Navbar = async () => {
               >
                 <button
                   type="submit"
-                  className="cursor-pointer w-full items-center gap-1 justify-center flex text-center"
+                  className="cursor-pointer w-full items-center gap-1 justify-center flex text-xs text-center"
                 >
                   <Github size={20} />
                   Login with Github

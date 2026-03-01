@@ -1,6 +1,18 @@
 "use client";
 
+import { ChevronDown } from "griddy-icons";
+import { Trash } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface Task {
   _id: string;
@@ -17,7 +29,7 @@ interface TasksProps {
 const Tasks = ({ status }: TasksProps) => {
   const [data, setData] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const [priorityLevel, setPriorityLevel] = useState<string>("Medium");
   useEffect(() => {
     const fetchTasks = async () => {
       setLoading(true);
@@ -53,11 +65,39 @@ const Tasks = ({ status }: TasksProps) => {
       {data.map((task) => (
         <div
           key={task._id}
-          className="border border-gray-400 inset-shadow-sm inset-shadow-gray-300 px-4 py-2 rounded-lg mb-2"
+          className="w-fulll border-b-2 border-gray-200 flex justify-between items-center  p-2  rounded-md "
         >
-          <h1>{task.taskName}</h1>
-          <p>{task.priority}</p>
-          <p>{task.status}</p>
+          <h1 className="text-sm">{task.taskName}</h1>
+
+          <div className="flex items-center gap-3">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">{priorityLevel}</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-32">
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel className="text-xs">
+                    Priority
+                  </DropdownMenuLabel>
+                  <DropdownMenuRadioGroup
+                    value={priorityLevel}
+                    onValueChange={setPriorityLevel}
+                  >
+                    <DropdownMenuRadioItem value="Low">
+                      Low
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="Medium">
+                      Medium
+                    </DropdownMenuRadioItem>
+                    <DropdownMenuRadioItem value="High">
+                      High
+                    </DropdownMenuRadioItem>
+                  </DropdownMenuRadioGroup>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Trash size={20} />
+          </div>
         </div>
       ))}
     </div>
