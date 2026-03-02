@@ -5,6 +5,7 @@ import { Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import SkeletonTask from "./SkeletonTask";
+import { Card } from "@/components/ui/card";
 interface Task {
   _id: string;
   taskName: string;
@@ -50,7 +51,7 @@ const Tasks = ({ status }: TasksProps) => {
     );
   }
   return (
-    <div className="">
+    <main className="w-full border-0">
       {data.map((task) => (
         <div
           key={task._id}
@@ -72,7 +73,7 @@ const Tasks = ({ status }: TasksProps) => {
           </div>
         </div>
       ))}
-    </div>
+    </main>
   );
 };
 export default Tasks;

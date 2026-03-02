@@ -1,4 +1,4 @@
-import Mainmenu from "./Mainmenu";
+import Mainmenu from "./SidebarMenu";
 
 const SidebarGroup = () => {
   return (
