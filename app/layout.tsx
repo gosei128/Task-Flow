@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const robotoMono = Roboto_Mono({
   variable: "--font-signika-negative",
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${robotoMono.className} antialiased bg-dark-blue-50 `}>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

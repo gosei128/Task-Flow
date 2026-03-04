@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import SkeletonTask from "./SkeletonTask";
 import { Card } from "@/components/ui/card";
+import { useSession } from "next-auth/react";
+
 interface Task {
   _id: string;
   taskName: string;
   priority: string;
   status: string;
   dueDate: Date;
+  userId: string;
 }
 
 interface TasksProps {
@@ -21,9 +24,25 @@ interface TasksProps {
 const Tasks = ({ status }: TasksProps) => {
   const [data, setData] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const { data: session, status: sessionStatus } = useSession();
+
   useEffect(() => {
     const fetchTasks = async () => {
+      // Wait for session to load
+      if (sessionStatus === "loading") {
+        return;
+      }
+
+      // Check if user is authenticated
+      if (sessionStatus === "unauthenticated") {
+        setError("Please log in to view your tasks");
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
+      setError(null);
       try {
         const response = await fetch(
           `http://localhost:3000/api/task?status=${status}`,
@@ -31,18 +50,55 @@ const Tasks = ({ status }: TasksProps) => {
             cache: "no-store",
           },
         );
+
+        if (response.status === 401) {
+          setError("Your session has expired. Please log in again.");
+          setData([]);
+          setLoading(false);
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch tasks: ${response.statusText}`);
+        }
+
         await new Promise((resolve) => setTimeout(resolve, 1000));
         const tasks = await response.json();
         setData(tasks);
       } catch (error) {
         console.error("Error fetching tasks:", error);
+        setError("Failed to load tasks. Please try again.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchTasks();
-  }, [status]);
+  }, [status, sessionStatus]);
+  console.log(data);
+
+  const handleDeleteTask = async (taskId: string) => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/task?taskId=${taskId}`,
+        {
+          method: "DELETE",
+        },
+      );
+
+      if (!response.ok) {
+        alert("Failed to delete task");
+        return;
+      }
+
+      // Remove task from state
+      setData((prevData) => prevData.filter((task) => task._id !== taskId));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+      alert("An error occurred while deleting the task");
+    }
+  };
+
   if (loading) {
     return (
       <div>
@@ -50,6 +106,27 @@ const Tasks = ({ status }: TasksProps) => {
       </div>
     );
   }
+
+  if (error) {
+    return (
+      <main className="w-full border-0">
+        <div className="text-center py-8 text-red-500">
+          <p>{error}</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <main className="w-full border-0">
+        <div className="text-center py-8 text-gray-500">
+          <p>No tasks found. Create one to get started!</p>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="w-full border-0">
       {data.map((task) => (
@@ -69,11 +146,17 @@ const Tasks = ({ status }: TasksProps) => {
             >
               {task.priority}
             </div>
-            <Trash size={20} />
+            <button
+              onClick={() => handleDeleteTask(task._id)}
+              className="hover:opacity-70 transition-opacity cursor-pointer"
+            >
+              <Trash size={20} />
+            </button>
           </div>
         </div>
       ))}
     </main>
   );
 };
+
 export default Tasks;
