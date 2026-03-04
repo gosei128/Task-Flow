@@ -2,6 +2,7 @@ import { auth, signIn, signOut } from "@/middleware/auth";
 import { Github } from "griddy-icons";
 import SidebarGroup from "../SidebarGroup";
 import { ChevronsUpDown } from "lucide-react";
+import AuthModal from "../AuthModal";
 import {
   Sidebar,
   SidebarContent,
@@ -85,42 +86,19 @@ const Navbar = async () => {
                   </DropdownMenuGroup>
                 </DropdownMenuContent>
               </DropdownMenu>
-
-              {/* <button type="submit" className="cursor-pointer text-xs w-full">
-                  <div className="text-left flex items-center gap-2">
-                    <img
-                      src={session.user.image}
-                      className="rounded-full w-8"
-                      alt=""
-                    />
-                    <div>
-                      <h6>{session.user.name}</h6>
-                      <h6>
-                        <small className="text-gray-400">
-                          {session.user.email}
-                        </small>
-                      </h6>
-                    </div>
-                  </div>
-                </button> */}
             </div>
           ) : (
             <div className="text-center">
-              <form
-                action={async () => {
-                  "use server";
-                  await signIn("github");
-                }}
-                className=" border-2  cursor-pointer bg-[#131316] text-white rounded-lg p-3 ring-2  text-center"
-              >
-                <button
+              <AuthModal>
+                <Button
                   type="submit"
-                  className="cursor-pointer w-full items-center gap-1 justify-center flex text-xs text-center"
+                  className="py-6 w-full bg-black text-white "
+                  variant="outline"
+                  size="sm"
                 >
-                  <Github size={20} />
-                  Login with Github
-                </button>
-              </form>
+                  Login
+                </Button>
+              </AuthModal>
             </div>
           )}
         </div>
