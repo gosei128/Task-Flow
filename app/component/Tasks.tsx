@@ -62,7 +62,7 @@ const Tasks = ({ status }: TasksProps) => {
           throw new Error(`Failed to fetch tasks: ${response.statusText}`);
         }
 
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 300));
         const tasks = await response.json();
         setData(tasks);
       } catch (error) {

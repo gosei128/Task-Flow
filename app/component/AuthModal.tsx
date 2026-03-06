@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
-import Login from "./Login";
+import { Google } from "griddy-icons";
 import { useState, ReactNode } from "react";
 import { signIn } from "next-auth/react";
 import { Git } from "griddy-icons";
@@ -37,6 +37,15 @@ const AuthModal = ({ children }: { children?: ReactNode }) => {
           }}
         >
           <Github className="mr-2 h-4 w-4" /> Continue with Github
+        </Button>
+        <Button
+          variant="default"
+          className="bg-[#131316] text-white p-2"
+          onClick={() => {
+            signIn("google");
+          }}
+        >
+          <Google className="mr-2 h-4 w-4" /> Continue with Google
         </Button>
         <DialogFooter className="justify-between"></DialogFooter>
       </DialogContent>

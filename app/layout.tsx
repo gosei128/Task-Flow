@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
+import { TaskProvider } from "./context/taskContext";
 
 const robotoMono = Roboto_Mono({
   variable: "--font-signika-negative",
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${robotoMono.className} antialiased bg-dark-blue-50 `}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <TaskProvider>{children}</TaskProvider>
+        </Providers>
       </body>
     </html>
   );

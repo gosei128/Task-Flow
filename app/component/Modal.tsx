@@ -151,7 +151,7 @@ const ModalTask = ({ children }: { children?: ReactNode }) => {
                   mode="single"
                   selected={dueDate}
                   onSelect={setDueDate}
-                  initialFocus
+                  buttonVariant={"outline"}
                 />
               </PopoverContent>
             </Popover>

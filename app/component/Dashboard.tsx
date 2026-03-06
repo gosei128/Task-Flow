@@ -1,5 +1,17 @@
+"use client";
+import { useTaskContext } from "../context/taskContext";
 import { ClipboardList, Check, Time, AlertCircle } from "griddy-icons";
 const Dashboard = () => {
+  const { tasks } = useTaskContext();
+  console.log(tasks);
+
+  const totalTasks = tasks.length;
+  const pendings = tasks.filter((task) => task.status === "pending").length;
+  const inProgress = tasks.filter(
+    (task) => task.status === "in-progress",
+  ).length;
+  const completed = tasks.filter((task) => task.status === "completed").length;
+
   return (
     <main className=" py-2 ">
       <div className="grid grid-cols-[repeat(4,1fr)] gap-y-2.5 gap-x-2.5">
@@ -12,7 +24,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <h1 className="text-3xl font-bold">127</h1>
+          <h1 className="text-3xl font-bold">{totalTasks}</h1>
           <p>
             <small className="text-green-600">+12% from last week</small>
           </p>
@@ -26,7 +38,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <h1 className="text-3xl font-bold">89</h1>
+          <h1 className="text-3xl font-bold">{completed}</h1>
           <p>
             <small className="text-green-600">+8% from last week</small>
           </p>
@@ -41,14 +53,14 @@ const Dashboard = () => {
             />
           </div>
 
-          <h1 className="text-3xl font-bold">23</h1>
+          <h1 className="text-3xl font-bold">{inProgress}</h1>
           <p>
             <small className="text-orange-600">+3% from last week</small>
           </p>
         </div>
         <div className="cards">
           <div className="flex items-center justify-between">
-            <h4>Overdue</h4>
+            <h4>Pendings</h4>
             <AlertCircle
               filled
               size={30}
@@ -56,7 +68,7 @@ const Dashboard = () => {
             />
           </div>
 
-          <h1 className="text-3xl font-bold">2</h1>
+          <h1 className="text-3xl font-bold">{pendings}</h1>
           <p>
             <small className="text-red-600"> -2% from last week</small>
           </p>
