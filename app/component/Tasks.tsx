@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import SkeletonTask from "./SkeletonTask";
 import { Card } from "@/components/ui/card";
 import { useSession } from "next-auth/react";
+import { useTaskContext } from "../context/taskContext";
 
 interface Task {
   _id: string;
@@ -26,6 +27,7 @@ const Tasks = ({ status }: TasksProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { data: session, status: sessionStatus } = useSession();
+  const { refreshTasks } = useTaskContext();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -75,7 +77,34 @@ const Tasks = ({ status }: TasksProps) => {
 
     fetchTasks();
   }, [status, sessionStatus]);
-  console.log(data);
+
+  const handleStatusChange = async (taskId: string, currentStatus: string) => {
+    let newStatus = "";
+    if (currentStatus === "pending") {
+      newStatus = "in-progress";
+    } else if (currentStatus === "in-progress") {
+      newStatus = "completed";
+    } else {
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/task`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ taskId, status: newStatus }),
+      });
+
+      if (response.ok) {
+        setData((prevData) => prevData.filter((task) => task._id !== taskId));
+        refreshTasks();
+      }
+    } catch (error) {
+      console.error("Error updating task status:", error);
+    }
+  };
 
   const handleDeleteTask = async (taskId: string) => {
     try {
@@ -93,6 +122,7 @@ const Tasks = ({ status }: TasksProps) => {
 
       // Remove task from state
       setData((prevData) => prevData.filter((task) => task._id !== taskId));
+      refreshTasks();
     } catch (error) {
       console.error("Error deleting task:", error);
       alert("An error occurred while deleting the task");
@@ -137,6 +167,24 @@ const Tasks = ({ status }: TasksProps) => {
           <h1 className="text-sm">{task.taskName}</h1>
 
           <div className="flex items-center gap-3">
+            {status === "pending" && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => handleStatusChange(task._id, "pending")}
+              >
+                Start
+              </Button>
+            )}
+            {status === "in-progress" && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => handleStatusChange(task._id, "in-progress")}
+              >
+                Done
+              </Button>
+            )}
             <div
               className={`text-sm border shadow-xs rounded-sm px-4 py-1
               ${task.priority === "low" ? "bg-linear-to-t/increasing from-green-100  to-white border-green-200 text-green-500 " : ""}

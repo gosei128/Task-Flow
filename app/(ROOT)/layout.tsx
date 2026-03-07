@@ -5,6 +5,7 @@ export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
+    
     <SidebarProvider className="h-full">
       <Navbar />
       <main className="antialiased flex-1">
