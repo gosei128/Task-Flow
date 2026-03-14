@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { auth } from "@/middleware/auth";
+import { auth } from "@/auth";
 import dbConnect from "@/app/lib/dbConnect";
 import Task from "@/app/models/Task";
 

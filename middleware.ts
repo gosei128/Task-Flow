@@ -1,7 +1,7 @@
-import { auth } from "@/middleware/auth";
+import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
-export async function middleware(request) {
+export async function middleware(request: any) {
   // Protected routes that require authentication
   const protectedRoutes = ["/app"];
 
@@ -27,5 +27,14 @@ export async function middleware(request) {
 
 // Configure which routes to run middleware on
 export const config = {
-  matcher: ["/app/:path*"],
+  matcher: [
+    /*
+     * Match all request paths except:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - public folder
+     */
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };

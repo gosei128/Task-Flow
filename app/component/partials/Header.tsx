@@ -1,4 +1,4 @@
-import { auth } from "@/middleware/auth";
+import { auth } from "@/auth";
 
 const Header = async () => {
   const session = await auth();
