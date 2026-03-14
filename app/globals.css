@@ -8,10 +8,43 @@
   font-family: "var(--font-signika-negative)", sans-serif;
 } */
 .cards {
-  @apply rounded-lg shadow-sm bg-white p-4 border-gray-500;
+  @apply rounded-lg w-full shadow-sm bg-white p-4 border-gray-500;
 }
 .Task {
   @apply border border-dark-blue-200 shadow-sm bg-dark-blue-100 rounded-lg p-2;
+}
+
+/* Mobile carousel */
+.dashboard-cards {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 0.625rem; /* gap-x-2.5 */
+  padding-bottom: 0.5rem;
+  /* hide scrollbar but keep scrollability */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.dashboard-cards::-webkit-scrollbar {
+  display: none;
+}
+.dashboard-card {
+  flex: 0 0 80%;
+  scroll-snap-align: start;
+}
+
+/* Tablet+: revert to grid (handled by Tailwind utilities on the element) */
+@media (min-width: 768px) {
+  .dashboard-cards {
+    overflow-x: visible;
+    scroll-snap-type: none;
+    padding-bottom: 0;
+  }
+  .dashboard-card {
+    flex: unset;
+    scroll-snap-align: none;
+  }
 }
 
 :root {
@@ -79,4 +112,9 @@
   --color-dark-blue-800: #2d09be;
   --color-dark-blue-900: #2a0aa8;
   --color-dark-blue-950: #150372;
+
+  --breakpoint-mobile: 375px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-large-desktop: 1440px;
 }
