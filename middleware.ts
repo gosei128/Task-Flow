@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
+export const runtime = "nodejs";
+
 export async function middleware(request: any) {
   // Protected routes that require authentication
   const protectedRoutes = ["/app"];

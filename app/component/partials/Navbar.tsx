@@ -1,5 +1,4 @@
 import { auth, signIn, signOut } from "@/auth";
-import { Github } from "griddy-icons";
 import SidebarGroup from "../SidebarGroup";
 import { ChevronsUpDown } from "lucide-react";
 import AuthModal from "../AuthModal";
