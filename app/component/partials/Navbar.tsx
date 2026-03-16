@@ -48,10 +48,12 @@ const Navbar = async () => {
                     size="sm"
                   >
                     <div className="text-left flex items-center w-full gap-2">
-                      <img
-                        src={session.user.image}
-                        className="rounded-full w-8"
-                        alt=""
+                      <Image
+                        src={session.user.image || ""}
+                        width={32}
+                        height={32}
+                        className="rounded-full w-8 h-8"
+                        alt="User Profile"
                       />
                       <div>
                         <h6>{session.user.name}</h6>
