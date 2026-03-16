@@ -8,14 +8,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Github } from "lucide-react";
 import { Google } from "griddy-icons";
 import { useState, ReactNode } from "react";
 import { signIn } from "next-auth/react";
-import { Git } from "griddy-icons";
 
 const AuthModal = ({ children }: { children?: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);

@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className="">
       <body className={`${robotoMono.className} antialiased bg-dark-blue-50 `}>
         <Providers>
           <TaskProvider>{children}</TaskProvider>

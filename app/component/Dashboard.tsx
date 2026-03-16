@@ -1,9 +1,30 @@
 "use client";
 import { useTaskContext } from "../context/taskContext";
 import { ClipboardList, Check, Time, AlertCircle } from "griddy-icons";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 const Dashboard = () => {
   const { tasks } = useTaskContext();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: -scrollRef.current.clientWidth,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: scrollRef.current.clientWidth,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const totalTasks = tasks.length;
   const pendings = tasks.filter((task) => task.status === "pending").length;
@@ -11,12 +32,13 @@ const Dashboard = () => {
     (task) => task.status === "in-progress",
   ).length;
   const completed = tasks.filter((task) => task.status === "completed").length;
-  console.log();
   return (
     <main className="py-2">
-      {/* Mobile: horizontal scroll carousel | Tablet+: 4-col grid */}
-      <div className="dashboard-cards tablet:grid tablet:grid-cols-[repeat(4,1fr)] tablet:gap-x-2.5 tablet:gap-y-2.5">
-        <div className="cards dashboard-card">
+      <div
+        ref={scrollRef}
+        className="flex tablet:grid mobile:w-sm desktop:w-full  overflow-x-auto snap-x snap-mandatory tablet:snap-none tablet:grid-cols-4 gap-4 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        <div className="cards flex-none w-full snap-center tablet:w-auto">
           <div className="flex items-center justify-between">
             <h4>Total Task</h4>
             <ClipboardList
@@ -29,7 +51,7 @@ const Dashboard = () => {
             <small className="text-green-600">+12% from last week</small>
           </p>
         </div>
-        <div className="cards dashboard-card">
+        <div className="cards flex-none w-full snap-center tablet:w-auto">
           <div className="flex items-center justify-between">
             <h4>Completed</h4>
             <Check
@@ -42,7 +64,7 @@ const Dashboard = () => {
             <small className="text-green-600">+8% from last week</small>
           </p>
         </div>
-        <div className="cards dashboard-card">
+        <div className="cards flex-none w-full snap-center tablet:w-auto">
           <div className="flex items-center justify-between">
             <h4>In Progress</h4>
             <Time
@@ -56,7 +78,7 @@ const Dashboard = () => {
             <small className="text-orange-600">+3% from last week</small>
           </p>
         </div>
-        <div className="cards dashboard-card">
+        <div className="cards flex-none w-full snap-center tablet:w-auto">
           <div className="flex items-center justify-between">
             <h4>Pendings</h4>
             <AlertCircle
@@ -70,6 +92,22 @@ const Dashboard = () => {
             <small className="text-red-600">-2% from last week</small>
           </p>
         </div>
+      </div>
+      <div className="flex items-center justify-center gap-2 mb-2 tablet:hidden">
+        <button
+          onClick={scrollLeft}
+          className="p-1.5 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        <button
+          onClick={scrollRight}
+          className="p-1.5 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors"
+          aria-label="Scroll right"
+        >
+          <ChevronRight size={20} />
+        </button>
       </div>
     </main>
   );

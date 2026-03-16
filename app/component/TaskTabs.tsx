@@ -18,11 +18,26 @@ const TaskTab = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList
             variant="default"
-            className=" border-b-2 border-gray-200 justify-start"
+            className="border-b-2 border-gray-200 justify-start flex-wrap h-auto p-1 overflow-x-auto scrollbar-none"
           >
-            <TabsTrigger value="pending">Pending</TabsTrigger>
-            <TabsTrigger value="in-progress">In-Progress</TabsTrigger>
-            <TabsTrigger value="completed">Completed</TabsTrigger>
+            <TabsTrigger
+              value="pending"
+              className="flex-1 sm:flex-none text-xs sm:text-sm px-2 py-1.5 sm:px-4 sm:py-2"
+            >
+              Pending
+            </TabsTrigger>
+            <TabsTrigger
+              value="in-progress"
+              className="flex-1 sm:flex-none text-xs sm:text-sm px-2 py-1.5 sm:px-4 sm:py-2"
+            >
+              In-Progress
+            </TabsTrigger>
+            <TabsTrigger
+              value="completed"
+              className="flex-1 sm:flex-none text-xs sm:text-sm px-2 py-1.5 sm:px-4 sm:py-2"
+            >
+              Completed
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="pending">
             <div className=" rounded-lg bg-white h-full w-full">

@@ -162,11 +162,13 @@ const Tasks = ({ status }: TasksProps) => {
       {data.map((task) => (
         <div
           key={task._id}
-          className="w-fulll border-b-2 mb-2 border-gray-200 flex justify-between items-center  p-2  rounded-md "
+          className="w-full border-b-2 mb-2 border-gray-200 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center p-3 gap-3 rounded-md"
         >
-          <h1 className="text-sm">{task.taskName}</h1>
+          <h1 className="text-sm font-medium break-words shrink break-all sm:break-normal">
+            {task.taskName}
+          </h1>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end mt-2 sm:mt-0">
             {status === "pending" && (
               <Button
                 size="sm"

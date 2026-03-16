@@ -2,7 +2,7 @@ import Homepage from "../component/partials/Home";
 
 export default function Home() {
   return (
-    <main className="w-full max-h-[550px] h-full px-7 py-2">
+    <main className="w-full h-auto px-3 sm:px-7 py-2 overflow-x-hidden">
       <Homepage />
     </main>
   );
