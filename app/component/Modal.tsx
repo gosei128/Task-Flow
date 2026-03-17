@@ -52,7 +52,7 @@ const ModalTask = ({ children }: { children?: ReactNode }) => {
     };
 
     try {
-      const response = await fetch("/api/task", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_APP}/api/task`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,8 +65,6 @@ const ModalTask = ({ children }: { children?: ReactNode }) => {
         setTaskName("");
         setPriority("");
         setDueDate(undefined);
-        // Refreshing the page to show the new task.
-        // A more advanced solution would involve state management to avoid a full reload.
         window.location.reload();
       } else {
         const errorData = await response.json();
