@@ -46,12 +46,9 @@ const Tasks = ({ status }: TasksProps) => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/task?status=${status}`,
-          {
-            cache: "no-store",
-          },
-        );
+        const response = await fetch(`/api/task?status=${status}`, {
+          cache: "no-store",
+        });
 
         if (response.status === 401) {
           setError("Your session has expired. Please log in again.");
@@ -89,7 +86,7 @@ const Tasks = ({ status }: TasksProps) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/task`, {
+      const response = await fetch("/api/task", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -108,12 +105,9 @@ const Tasks = ({ status }: TasksProps) => {
 
   const handleDeleteTask = async (taskId: string) => {
     try {
-      const response = await fetch(
-        `http://localhost:3000/api/task?taskId=${taskId}`,
-        {
-          method: "DELETE",
-        },
-      );
+      const response = await fetch(`/api/task?taskId=${taskId}`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) {
         alert("Failed to delete task");
