@@ -52,7 +52,7 @@ const ModalTask = ({ children }: { children?: ReactNode }) => {
     };
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_APP}/api/task`, {
+      const response = await fetch(`/api/task`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

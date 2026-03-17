@@ -45,7 +45,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_APP}/api/task`, {
+      const response = await fetch(`/api/task`, {
         cache: "no-store",
       });
 
